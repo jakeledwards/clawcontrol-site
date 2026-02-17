@@ -1,0 +1,333 @@
+---
+layout: base.njk
+title: Cross-Platform Client for OpenClaw AI
+description: "ClawControl is a cross-platform desktop and mobile client for OpenClaw AI assistant. Concurrent agent streaming, skill browser, subagent spawning, and more."
+---
+
+{# ========== NAV ========== #}
+<nav class="fixed top-0 left-0 right-0 z-50 h-16 flex items-center border-b border-white/[0.08] bg-[#06080a]/85 backdrop-blur-xl">
+  <div class="max-w-[1140px] mx-auto px-6 w-full flex items-center justify-between relative">
+    <a href="#" class="flex items-center gap-3 font-mono font-semibold text-lg text-tprimary no-underline">
+      <img src="/assets/images/icon.png" alt="ClawControl" class="w-9 h-9 rounded-lg">
+      <span>ClawControl</span>
+    </a>
+
+    <button class="nav-toggle hidden max-sm:block bg-transparent border border-white/[0.15] rounded-lg p-2 cursor-pointer text-tprimary"
+            onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+
+    <ul class="nav-links flex items-center gap-8 list-none max-sm:hidden">
+      <li><a href="#features" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Features</a></li>
+      <li><a href="#screenshots" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Screenshots</a></li>
+      <li><a href="#download" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Download</a></li>
+      <li><a href="#beta" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Beta</a></li>
+      <li>
+        <a href="{{ site.github }}" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 px-4 py-2 border border-white/[0.15] rounded-lg font-mono text-[13px] text-tprimary no-underline transition-all hover:border-cyan hover:shadow-[0_0_20px_rgba(0,217,255,0.25)]">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <style>
+    .nav-links.open {
+      display: flex !important;
+      flex-direction: column;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: rgba(6, 8, 10, 0.97);
+      padding: 24px;
+      gap: 20px;
+      border-bottom: 1px solid rgba(240, 246, 252, 0.08);
+    }
+  </style>
+</nav>
+
+{# ========== HERO ========== #}
+<section class="min-h-screen flex items-center pt-16 relative">
+  {# Radial glow #}
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,217,255,0.06)_0%,transparent_70%)] pointer-events-none"></div>
+
+  <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="lg:text-left text-center">
+        <div class="animate delay-1 inline-flex items-center gap-2 px-3.5 py-1.5 bg-cyan/[0.08] border border-cyan/20 rounded-full font-mono text-xs text-cyan tracking-wider mb-6">
+          <span class="w-1.5 h-1.5 bg-green-500 rounded-full" style="animation: pulse-dot 2s ease-in-out infinite"></span>
+          v{{ site.version }} &mdash; Now with mobile support
+        </div>
+
+        <h1 class="animate delay-2 font-mono text-[clamp(36px,5vw,56px)] font-bold leading-[1.1] tracking-tight mb-6">
+          Your AI.<br><span class="text-cyan">Your control.</span>
+        </h1>
+
+        <p class="animate delay-3 text-lg text-tsecondary leading-relaxed mb-10 max-w-[480px] lg:mx-0 mx-auto">
+          ClawControl is a cross-platform client for the OpenClaw AI assistant. Stream multiple agents concurrently, spawn subagents, browse skills, and manage your entire AI stack from one interface.
+        </p>
+
+        <div class="animate delay-4 flex gap-4 flex-wrap max-lg:justify-center max-sm:flex-col max-sm:items-stretch">
+          <a href="#download"
+             class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-cyan text-deep rounded-[10px] font-mono text-sm font-medium no-underline transition-all hover:bg-[#33e1ff] hover:shadow-[0_0_30px_rgba(0,217,255,0.2)] hover:-translate-y-0.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+          <a href="{{ site.github }}" target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-transparent text-tprimary border border-white/[0.15] rounded-[10px] font-mono text-sm font-medium no-underline transition-all hover:border-cyan hover:text-cyan hover:-translate-y-0.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View Source
+          </a>
+        </div>
+      </div>
+
+      <div class="animate delay-5 relative">
+        <div class="absolute -inset-0.5 rounded-[14px] bg-gradient-to-br from-cyan/15 via-transparent to-purple/10 -z-[1]"></div>
+        <img src="/assets/images/screenshots/home.png" alt="ClawControl main chat interface"
+             class="w-full rounded-xl border border-white/[0.15] shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_30px_rgba(0,217,255,0.2)]">
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ========== FEATURES ========== #}
+<section id="features" class="py-24">
+  <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
+    <div class="font-mono text-xs uppercase tracking-[2px] text-cyan mb-4 reveal">// capabilities</div>
+    <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">Everything you need to<br>command your AI</h2>
+    <p class="text-tsecondary text-base max-w-[560px] mb-16 leading-relaxed reveal">Built for power users who need full control over their OpenClaw agents, sessions, and workflows.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      {% set features = [
+        { "icon": "bolt", "title": "Concurrent Streaming", "desc": "Talk to multiple agents simultaneously. Per-session stream isolation means zero cross-contamination between conversations." },
+        { "icon": "gear", "title": "Server Settings", "desc": "Full-page editor for your OpenClaw server configuration. Agent defaults, tools, memory backends, and channel policies." },
+        { "icon": "monitor", "title": "Subagent Spawning", "desc": "Spawn isolated subagent sessions for parallel task execution. Inline status blocks with popout windows for each subagent." },
+        { "icon": "layers", "title": "ClawHub Skills", "desc": "Browse, search, and install skills from ClawHub. VirusTotal security scan badges, download counts, and one-click install." },
+        { "icon": "chat", "title": "Thinking Mode", "desc": "Toggle extended thinking for complex tasks. See the agent's reasoning process displayed inline as it works through problems." },
+        { "icon": "wrench", "title": "Tool Visibility", "desc": "See every tool call inline as the agent works. Full transparency into code execution, web searches, and file operations." },
+        { "icon": "users", "title": "Agent Management", "desc": "Create, configure, and delete agents. Browse agent profiles, workspace files, and per-session identity switching." },
+        { "icon": "clock", "title": "Cron Jobs", "desc": "View and manage scheduled tasks with live status updates. Pause, resume, and inspect cron job details and run history." },
+        { "icon": "phone", "title": "Cross-Platform", "desc": "Runs everywhere. Windows and macOS via Electron, iOS and Android via Capacitor. One codebase, full native feel." }
+      ] %}
+
+      {% for f in features %}
+      <div class="reveal group bg-primary border border-white/[0.08] rounded-xl p-8 transition-all duration-300 relative overflow-hidden hover:border-cyan/20 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.3)]">
+        <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <div class="w-11 h-11 rounded-[10px] flex items-center justify-center mb-5 bg-cyan/[0.08] border border-cyan/[0.15]">
+          {% if f.icon == "bolt" %}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          {% elif f.icon == "gear" %}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          {% elif f.icon == "monitor" %}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          {% elif f.icon == "layers" %}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          {% elif f.icon == "chat" %}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          {% elif f.icon == "wrench" %}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          {% elif f.icon == "users" %}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          {% elif f.icon == "clock" %}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          {% elif f.icon == "phone" %}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+          {% endif %}
+        </div>
+        <h3 class="font-mono text-base font-semibold mb-2.5 text-tprimary">{{ f.title }}</h3>
+        <p class="text-sm text-tsecondary leading-relaxed">{{ f.desc }}</p>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+{# ========== SCREENSHOTS ========== #}
+<section id="screenshots" class="py-24 bg-primary border-y border-white/[0.08]">
+  <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
+    <div class="font-mono text-xs uppercase tracking-[2px] text-cyan mb-4 reveal">// in action</div>
+    <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">See it for yourself</h2>
+    <p class="text-tsecondary text-base max-w-[560px] mb-16 leading-relaxed reveal">Dark-mode-first UI with streaming markdown, inline tool calls, and full skill management.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {% set shots = [
+        { "src": "subagents.png", "caption": "Inline subagent status blocks with popout links" },
+        { "src": "skillsearch.png", "caption": "ClawHub skill browser with security scan badges" },
+        { "src": "agent.png", "caption": "Agent profile with config and workspace files" },
+        { "src": "cronjob.png", "caption": "Cron job management with live status" }
+      ] %}
+      {% for s in shots %}
+      <div class="reveal rounded-xl overflow-hidden border border-white/[0.08] transition-all duration-300 hover:border-cyan/25 hover:scale-[1.02] hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+        <img src="/assets/images/screenshots/{{ s.src }}" alt="{{ s.caption }}" loading="lazy" class="w-full block">
+        <div class="px-5 py-4 bg-elevated font-mono text-[13px] text-tsecondary border-t border-white/[0.08]">{{ s.caption }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ========== DOWNLOAD ========== #}
+<section id="download" class="py-24">
+  <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
+    <div class="font-mono text-xs uppercase tracking-[2px] text-cyan mb-4 reveal">// download</div>
+    <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">Get ClawControl</h2>
+    <p class="text-tsecondary text-base max-w-[560px] mb-12 leading-relaxed reveal">Pre-built binaries for desktop. Mobile apps coming soon to app stores.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {# Windows #}
+      <div class="reveal bg-primary border border-white/[0.08] rounded-[14px] p-9 text-center transition-all duration-300 hover:border-cyan/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+        <div class="mb-4">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="#00d9ff"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+        </div>
+        <h3 class="font-mono text-xl font-semibold mb-2">Windows</h3>
+        <p class="text-tsecondary text-sm mb-6">Windows 10+ &mdash; x64</p>
+        <div class="flex flex-col gap-2.5">
+          <a href="https://github.com/jakeledwards/ClawControl/releases/download/v{{ site.version }}/ClawControl.Setup.{{ site.version }}.exe"
+             class="inline-flex items-center justify-center gap-2.5 px-5 py-3 bg-cyan text-deep rounded-[10px] font-mono text-[13px] font-medium no-underline transition-all hover:bg-[#33e1ff] hover:shadow-[var(--glow-cyan)] hover:-translate-y-0.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Installer (.exe)
+          </a>
+          <a href="https://github.com/jakeledwards/ClawControl/releases/download/v{{ site.version }}/ClawControl.{{ site.version }}.exe"
+             class="inline-flex items-center justify-center gap-2.5 px-5 py-3 bg-transparent text-tprimary border border-white/[0.15] rounded-[10px] font-mono text-[13px] font-medium no-underline transition-all hover:border-cyan hover:text-cyan hover:-translate-y-0.5">
+            Portable (.exe)
+          </a>
+        </div>
+      </div>
+
+      {# macOS #}
+      <div class="reveal bg-primary border border-white/[0.08] rounded-[14px] p-9 text-center transition-all duration-300 hover:border-cyan/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+        <div class="mb-4">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="#00d9ff"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        </div>
+        <h3 class="font-mono text-xl font-semibold mb-2">macOS</h3>
+        <p class="text-tsecondary text-sm mb-6">macOS 12+ &mdash; Universal</p>
+        <div class="flex flex-col gap-2.5">
+          <a href="https://github.com/jakeledwards/ClawControl/releases" target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2.5 px-5 py-3 bg-cyan text-deep rounded-[10px] font-mono text-[13px] font-medium no-underline transition-all hover:bg-[#33e1ff] hover:shadow-[var(--glow-cyan)] hover:-translate-y-0.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            View Releases
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ========== BETA SIGNUP (Google Form) ========== #}
+<section id="beta" class="py-24 bg-primary border-y border-white/[0.08]">
+  <div class="max-w-[600px] mx-auto px-6 text-center relative z-[1]">
+    <div class="reveal inline-flex items-center gap-2 px-3.5 py-1.5 bg-purple/10 border border-purple/25 rounded-full font-mono text-xs text-purple tracking-wider mb-6">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+      Mobile Beta
+    </div>
+    <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">Join the mobile beta</h2>
+    <p class="text-tsecondary text-base mb-10 leading-relaxed reveal">
+      ClawControl is coming to iOS and Android. Sign up to get early access to the app store beta.
+    </p>
+
+    {# Success state (shown after submit) #}
+    <div id="formSuccess" class="hidden text-center py-10 px-5">
+      <div class="w-14 h-14 bg-green-500/10 border-2 border-green-500 rounded-full inline-flex items-center justify-center mb-5 text-2xl text-green-500">&#10003;</div>
+      <h3 class="font-mono text-xl mb-2">You're on the list</h3>
+      <p class="text-tsecondary text-sm">We'll email you when the beta is ready for your platform.</p>
+    </div>
+
+    {# Google Form submitted via hidden iframe #}
+    <iframe name="google-form-target" id="googleFormTarget" class="hidden"></iframe>
+
+    <form id="betaForm" class="reveal text-left"
+          action="{{ site.googleFormAction }}"
+          method="POST"
+          target="google-form-target"
+          onsubmit="handleBetaSubmit()">
+
+      <div class="mb-5">
+        <label for="email" class="block font-mono text-[13px] text-tsecondary mb-2 tracking-wide">Email address</label>
+        <input type="email"
+               id="email"
+               name="{{ site.googleFormEmailField }}"
+               placeholder="you@example.com"
+               required
+               class="w-full px-[18px] py-3.5 bg-elevated border border-white/[0.15] rounded-[10px] text-tprimary font-mono text-sm outline-none transition-all focus:border-cyan focus:shadow-[0_0_0_3px_rgba(0,217,255,0.1)] placeholder:text-tmuted">
+      </div>
+
+      <div class="mb-5">
+        <label class="block font-mono text-[13px] text-tsecondary mb-2 tracking-wide">Which platform?</label>
+        <div class="grid grid-cols-3 gap-3 max-sm:grid-cols-1">
+          {% set platforms = [
+            { "id": "os-ios", "value": "iOS", "emoji": "&#x1F34E;", "label": "iOS" },
+            { "id": "os-android", "value": "Android", "emoji": "&#x1F916;", "label": "Android" },
+            { "id": "os-both", "value": "Both", "emoji": "&#x1F4F1;", "label": "Both" }
+          ] %}
+          {% for p in platforms %}
+          <div class="os-option">
+            <input type="radio" id="{{ p.id }}" name="{{ site.googleFormOsField }}" value="{{ p.value }}" class="hidden peer" {{ "required" if loop.first }}>
+            <label for="{{ p.id }}"
+                   class="flex flex-col items-center gap-2 py-5 px-4 bg-elevated border border-white/[0.15] rounded-[10px] cursor-pointer transition-all font-mono text-sm text-tsecondary hover:border-purple/40 peer-checked:border-purple peer-checked:bg-purple/[0.08] peer-checked:text-tprimary peer-checked:shadow-[0_0_0_3px_rgba(168,85,247,0.1)]">
+              <span class="text-[28px]">{{ p.emoji | safe }}</span>
+              <span>{{ p.label }}</span>
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <button type="submit"
+              class="w-full py-4 bg-purple text-white border-none rounded-[10px] font-mono text-sm font-semibold cursor-pointer transition-all tracking-wide mt-2 hover:bg-[#b97aff] hover:shadow-[var(--glow-purple)] hover:-translate-y-0.5">
+        Request beta access
+      </button>
+      <p class="text-xs text-tmuted mt-4 text-center font-mono">No spam. We'll only email you about the beta.</p>
+    </form>
+  </div>
+</section>
+
+{# ========== TECH STACK ========== #}
+<section class="py-24">
+  <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
+    <div class="font-mono text-xs uppercase tracking-[2px] text-cyan mb-4 reveal">// built with</div>
+    <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">Tech stack</h2>
+    <p class="text-tsecondary text-base max-w-[560px] mb-10 leading-relaxed reveal">Modern tooling for a fast, type-safe, cross-platform experience.</p>
+
+    <div class="flex flex-wrap gap-3 reveal">
+      {% set techs = [
+        { "name": "React 18", "color": "#61dafb" },
+        { "name": "TypeScript", "color": "#3178c6" },
+        { "name": "Electron", "color": "#47848f" },
+        { "name": "Capacitor", "color": "#119eff" },
+        { "name": "Vite", "color": "#646cff" },
+        { "name": "Zustand", "color": "#f6a61a" },
+        { "name": "Vitest", "color": "#729b1b" },
+        { "name": "OpenClaw Protocol v3", "color": "#00d9ff" }
+      ] %}
+      {% for t in techs %}
+      <span class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary border border-white/[0.08] rounded-full font-mono text-[13px] text-tsecondary transition-all hover:border-cyan hover:text-cyan">
+        <span class="w-2 h-2 rounded-full" style="background: {{ t.color }}"></span>
+        {{ t.name }}
+      </span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ========== FOOTER ========== #}
+<footer class="py-14 border-t border-white/[0.08]">
+  <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
+    <div class="flex justify-between items-center max-sm:flex-col max-sm:gap-5 max-sm:text-center">
+      <div class="flex items-center gap-3 font-mono text-sm text-tmuted">
+        <img src="/assets/images/icon.png" alt="" class="w-7 h-7 rounded-md opacity-50">
+        <span>ClawControl &mdash; MIT License</span>
+      </div>
+      <ul class="flex gap-6 list-none">
+        <li><a href="{{ site.github }}" target="_blank" rel="noopener" class="font-mono text-[13px] text-tmuted no-underline hover:text-cyan transition-colors">GitHub</a></li>
+        <li><a href="{{ site.github }}/releases" target="_blank" rel="noopener" class="font-mono text-[13px] text-tmuted no-underline hover:text-cyan transition-colors">Releases</a></li>
+        <li><a href="{{ site.github }}/issues" target="_blank" rel="noopener" class="font-mono text-[13px] text-tmuted no-underline hover:text-cyan transition-colors">Issues</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function handleBetaSubmit() {
+    // The form POSTs to Google Forms via the hidden iframe.
+    // After a short delay (to let the POST fire), show the success state.
+    setTimeout(() => {
+      document.getElementById('formSuccess').classList.remove('hidden');
+      document.getElementById('betaForm').classList.add('hidden');
+    }, 500);
+  }
+</script>

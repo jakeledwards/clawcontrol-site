@@ -1,0 +1,32 @@
+name: Deploy
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+      - run: npm run build
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::021891617399:role/clawcontrol-github-oidc
+          aws-region: us-east-1
+      - run: |
+          # Sync HTML files with short cache (1 hour)
+          aws s3 sync _site/ s3://clawcontrol.app/ --delete \
+            --exclude "assets/*" \
+            --cache-control "public, max-age=3600"
+
+          # Sync static assets with long cache (1 year)
+          aws s3 sync _site/assets/ s3://clawcontrol.app/assets/ \
+            --cache-control "public, max-age=31536000, immutable"
+      - run: aws cloudfront create-invalidation --distribution-id $DIST_ID --paths "/*"
+        env:
+          DIST_ID: E2DEPV3E3GM7D3
