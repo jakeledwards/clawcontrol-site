@@ -1,0 +1,96 @@
+---
+layout: base.njk
+title: Privacy Policy
+description: "Privacy Policy for ClawControl — how we handle your data."
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 h-16 flex items-center border-b border-white/[0.08] bg-[#06080a]/85 backdrop-blur-xl">
+  <div class="max-w-[1140px] mx-auto px-6 w-full flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3 font-mono font-semibold text-lg text-tprimary no-underline">
+      <img src="/assets/images/icon.png" alt="ClawControl" class="w-9 h-9 rounded-lg">
+      <span>ClawControl</span>
+    </a>
+    <a href="/" class="font-mono text-[13px] text-tsecondary hover:text-cyan no-underline transition-colors">&larr; Back to home</a>
+  </div>
+</nav>
+
+<section class="pt-32 pb-24">
+  <div class="max-w-[720px] mx-auto px-6 relative z-[1]">
+    <div class="font-mono text-xs uppercase tracking-[2px] text-cyan mb-4">// legal</div>
+    <h1 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4">Privacy Policy</h1>
+    <p class="text-tmuted font-mono text-sm mb-12">Last updated: February 17, 2026</p>
+
+    <div class="space-y-10 text-tsecondary leading-relaxed">
+
+      <div>
+        <h2 class="font-mono text-lg font-semibold text-tprimary mb-3">Overview</h2>
+        <p>ClawControl is an open-source client application that connects to your self-hosted OpenClaw server. We are committed to protecting your privacy. This policy explains what data we collect and how we use it.</p>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-lg font-semibold text-tprimary mb-3">Data the app collects</h2>
+        <p class="mb-3">ClawControl is a client that connects directly to <strong class="text-tprimary">your</strong> OpenClaw server. We do not operate any intermediary servers.</p>
+        <ul class="list-disc list-inside space-y-2 pl-2">
+          <li><strong class="text-tprimary">No telemetry.</strong> The app does not send analytics, crash reports, or usage data to us or any third party.</li>
+          <li><strong class="text-tprimary">No account required.</strong> There is no ClawControl account. Authentication is between you and your OpenClaw server.</li>
+          <li><strong class="text-tprimary">Local storage only.</strong> Settings (server URL, theme preference, sidebar state) are stored locally on your device via localStorage or the platform keychain. They are never transmitted to us.</li>
+          <li><strong class="text-tprimary">Chat data stays on your server.</strong> All messages, sessions, and agent data are stored on and retrieved from your OpenClaw server. ClawControl does not store, cache, or forward chat content to any external service.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-lg font-semibold text-tprimary mb-3">Data this website collects</h2>
+        <p class="mb-3">The clawcontrol.app website is a static site hosted on AWS CloudFront/S3. We collect minimal data:</p>
+        <ul class="list-disc list-inside space-y-2 pl-2">
+          <li><strong class="text-tprimary">Beta signup form.</strong> If you sign up for the mobile beta, we collect your email address and platform preference (iOS/Android) via Google Forms. This data is used solely to notify you when the beta is available and is not shared with third parties.</li>
+          <li><strong class="text-tprimary">Server logs.</strong> AWS CloudFront may log standard access information (IP address, requested URL, user agent, timestamp) for operational purposes. These logs are not used for tracking and are automatically deleted.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-lg font-semibold text-tprimary mb-3">Third-party services</h2>
+        <ul class="list-disc list-inside space-y-2 pl-2">
+          <li><strong class="text-tprimary">Google Fonts.</strong> This website loads fonts from Google Fonts, which may log your IP address per <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="text-cyan hover:text-white transition-colors">Google's Privacy Policy</a>.</li>
+          <li><strong class="text-tprimary">Google Forms.</strong> Beta signups are processed through Google Forms, subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="text-cyan hover:text-white transition-colors">Google's Privacy Policy</a>.</li>
+          <li><strong class="text-tprimary">GitHub.</strong> Download links point to GitHub Releases. Downloading is subject to <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener" class="text-cyan hover:text-white transition-colors">GitHub's Privacy Statement</a>.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-lg font-semibold text-tprimary mb-3">Your rights</h2>
+        <p>You may request deletion of any data we hold about you (e.g., beta signup email) by contacting us. Since the app itself collects no data, there is nothing to delete on the app side.</p>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-lg font-semibold text-tprimary mb-3">Children's privacy</h2>
+        <p>ClawControl is not directed at children under 13. We do not knowingly collect personal information from children.</p>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-lg font-semibold text-tprimary mb-3">Changes to this policy</h2>
+        <p>We may update this policy from time to time. Changes will be posted on this page with an updated revision date.</p>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-lg font-semibold text-tprimary mb-3">Contact</h2>
+        <p>If you have questions about this policy, open an issue on <a href="{{ site.github }}" target="_blank" rel="noopener" class="text-cyan hover:text-white transition-colors">GitHub</a>.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="py-14 border-t border-white/[0.08]">
+  <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
+    <div class="flex justify-between items-center max-sm:flex-col max-sm:gap-5 max-sm:text-center">
+      <div class="flex items-center gap-3 font-mono text-sm text-tmuted">
+        <img src="/assets/images/icon.png" alt="" class="w-7 h-7 rounded-md opacity-50">
+        <span>ClawControl &mdash; MIT License</span>
+      </div>
+      <ul class="flex gap-6 list-none">
+        <li><a href="{{ site.github }}" target="_blank" rel="noopener" class="font-mono text-[13px] text-tmuted no-underline hover:text-cyan transition-colors">GitHub</a></li>
+        <li><a href="{{ site.github }}/releases" target="_blank" rel="noopener" class="font-mono text-[13px] text-tmuted no-underline hover:text-cyan transition-colors">Releases</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
