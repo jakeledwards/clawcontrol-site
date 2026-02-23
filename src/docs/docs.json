@@ -1,0 +1,4 @@
+{
+  "layout": "docs.njk",
+  "templateEngineOverride": "md"
+}

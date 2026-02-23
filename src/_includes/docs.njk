@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} — {{ site.name }} Docs</title>
+  <meta name="description" content="{{ description or 'ClawControl documentation — architecture, API reference, developer guide, and more.' }}">
+  <link rel="icon" type="image/png" href="/assets/images/icon.png">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  {% if site.gtagId %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gtagId }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.gtagId }}');
+  </script>
+  {% endif %}
+
+  <meta property="og:title" content="{{ title }} — {{ site.name }} Docs">
+  <meta property="og:description" content="{{ description or 'ClawControl documentation.' }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/site.css">
+
+  {# Prism theme for syntax highlighting #}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+
+  <style>
+    :root {
+      --bg-deep: #06080a;
+      --bg-primary: #0d1117;
+      --bg-elevated: #161b22;
+      --bg-hover: #21262d;
+      --bg-active: #30363d;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-muted: #484f58;
+      --accent-cyan: #00d9ff;
+      --accent-cyan-dim: #00a3bf;
+      --accent-purple: #a855f7;
+      --border-subtle: rgba(240, 246, 252, 0.08);
+      --border-default: rgba(240, 246, 252, 0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      margin: 0;
+    }
+
+    /* ========== DOCS LAYOUT ========== */
+    .docs-layout {
+      display: flex;
+      min-height: 100vh;
+      padding-top: 64px;
+    }
+
+    /* ========== SIDEBAR ========== */
+    .docs-sidebar {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      bottom: 0;
+      width: 260px;
+      padding: 24px 16px;
+      border-right: 1px solid var(--border-subtle);
+      background: var(--bg-primary);
+      overflow-y: auto;
+      z-index: 10;
+    }
+
+    .docs-sidebar-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      padding-left: 12px;
+    }
+
+    .docs-sidebar a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 150ms ease;
+      line-height: 1.4;
+    }
+
+    .docs-sidebar a:hover {
+      color: var(--text-primary);
+      background: var(--bg-hover);
+    }
+
+    .docs-sidebar a.active {
+      color: var(--accent-cyan);
+      background: rgba(0, 217, 255, 0.06);
+    }
+
+    /* ========== MAIN CONTENT ========== */
+    .docs-main {
+      flex: 1;
+      margin-left: 260px;
+      max-width: 860px;
+      padding: 40px 48px 80px;
+    }
+
+    /* ========== PROSE STYLES ========== */
+    .docs-prose h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .docs-prose h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      font-weight: 600;
+      margin: 48px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+      letter-spacing: -0.01em;
+    }
+
+    .docs-prose h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 17px;
+      font-weight: 600;
+      margin: 32px 0 12px;
+    }
+
+    .docs-prose h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 600;
+      margin: 24px 0 8px;
+      color: var(--text-secondary);
+    }
+
+    .docs-prose p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin: 0 0 16px;
+    }
+
+    .docs-prose a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 150ms ease;
+    }
+
+    .docs-prose a:hover {
+      border-bottom-color: var(--accent-cyan);
+    }
+
+    .docs-prose strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .docs-prose hr {
+      border: none;
+      border-top: 1px solid var(--border-subtle);
+      margin: 40px 0;
+    }
+
+    /* Lists */
+    .docs-prose ul, .docs-prose ol {
+      padding-left: 24px;
+      margin: 0 0 16px;
+    }
+
+    .docs-prose li {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .docs-prose li strong {
+      color: var(--text-primary);
+    }
+
+    /* Code */
+    .docs-prose code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent-cyan);
+    }
+
+    .docs-prose pre {
+      background: var(--bg-elevated) !important;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 0 0 20px;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+
+    .docs-prose pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--text-primary);
+      font-size: 13px;
+    }
+
+    /* Tables */
+    .docs-prose table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 20px;
+      font-size: 14px;
+    }
+
+    .docs-prose thead th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-default);
+      background: var(--bg-primary);
+    }
+
+    .docs-prose tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+
+    .docs-prose tbody tr:hover {
+      background: var(--bg-hover);
+    }
+
+    .docs-prose tbody td code {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* Blockquotes */
+    .docs-prose blockquote {
+      border-left: 3px solid var(--accent-cyan);
+      margin: 0 0 16px;
+      padding: 12px 20px;
+      background: rgba(0, 217, 255, 0.04);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .docs-prose blockquote p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    /* Anchor links on headings */
+    .docs-prose .header-anchor {
+      color: var(--text-muted);
+      text-decoration: none;
+      opacity: 0;
+      transition: opacity 150ms ease;
+      margin-left: 6px;
+      font-size: 0.8em;
+    }
+
+    .docs-prose h2:hover .header-anchor,
+    .docs-prose h3:hover .header-anchor,
+    .docs-prose h4:hover .header-anchor {
+      opacity: 1;
+    }
+
+    /* ========== MOBILE ========== */
+    .docs-mobile-toggle {
+      display: none;
+    }
+
+    @media (max-width: 860px) {
+      .docs-sidebar {
+        transform: translateX(-100%);
+        transition: transform 250ms ease;
+        z-index: 40;
+      }
+
+      .docs-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .docs-main {
+        margin-left: 0;
+        padding: 24px 20px 60px;
+      }
+
+      .docs-mobile-toggle {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-default);
+        border-radius: 8px;
+        color: var(--text-secondary);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        cursor: pointer;
+        margin-bottom: 20px;
+      }
+
+      .docs-mobile-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 35;
+      }
+
+      .docs-mobile-overlay.open {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body class="font-body leading-relaxed">
+
+  {# ========== NAV ========== #}
+  <nav class="fixed top-0 left-0 right-0 z-50 h-16 flex items-center border-b border-white/[0.08] bg-[#06080a]/85 backdrop-blur-xl">
+    <div class="max-w-[1400px] mx-auto px-6 w-full flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 font-mono font-semibold text-lg text-tprimary no-underline">
+        <img src="/assets/images/icon.png" alt="ClawControl" class="w-9 h-9 rounded-lg">
+        <span>ClawControl</span>
+      </a>
+
+      <ul class="flex items-center gap-8 list-none max-sm:hidden">
+        <li><a href="/docs/" class="font-mono text-[13px] text-cyan uppercase tracking-wider no-underline">Docs</a></li>
+        <li><a href="/#features" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Features</a></li>
+        <li><a href="/#download" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Download</a></li>
+        <li>
+          <a href="{{ site.github }}" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 px-4 py-2 border border-white/[0.15] rounded-lg font-mono text-[13px] text-tprimary no-underline transition-all hover:border-cyan hover:shadow-[0_0_20px_rgba(0,217,255,0.25)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  {# ========== DOCS LAYOUT ========== #}
+  <div class="docs-layout">
+    <div class="docs-mobile-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <aside class="docs-sidebar" id="docsSidebar">
+      <div class="docs-sidebar-label">Documentation</div>
+
+      {% set navItems = [
+        { url: "/docs/", label: "Overview" },
+        { url: "/docs/getting-started/", label: "Getting Started" },
+        { url: "/docs/architecture/", label: "Architecture" },
+        { url: "/docs/api-reference/", label: "API Reference" },
+        { url: "/docs/state-management/", label: "State Management" },
+        { url: "/docs/developer-guide/", label: "Developer Guide" },
+        { url: "/docs/component-reference/", label: "Component Reference" }
+      ] %}
+
+      {% for item in navItems %}
+        <a href="{{ item.url }}" class="{% if page.url == item.url %}active{% endif %}">{{ item.label }}</a>
+      {% endfor %}
+    </aside>
+
+    <main class="docs-main">
+      <button class="docs-mobile-toggle" onclick="toggleSidebar()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        Navigation
+      </button>
+
+      <article class="docs-prose">
+        {{ content | safe }}
+      </article>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('docsSidebar').classList.toggle('open');
+      document.getElementById('sidebarOverlay').classList.toggle('open');
+    }
+    function closeSidebar() {
+      document.getElementById('docsSidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('open');
+    }
+  </script>
+</body>
+</html>
