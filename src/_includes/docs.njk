@@ -285,20 +285,22 @@
       color: var(--text-secondary);
     }
 
-    /* Anchor links on headings */
-    .docs-prose .header-anchor {
-      color: var(--text-muted);
+    /* Heading anchor links — inherit heading color, not link color */
+    .docs-prose h1 > .header-anchor,
+    .docs-prose h2 > .header-anchor,
+    .docs-prose h3 > .header-anchor,
+    .docs-prose h4 > .header-anchor {
+      color: inherit;
       text-decoration: none;
-      opacity: 0;
-      transition: opacity 150ms ease;
-      margin-left: 6px;
-      font-size: 0.8em;
+      border-bottom: none;
     }
 
-    .docs-prose h2:hover .header-anchor,
-    .docs-prose h3:hover .header-anchor,
-    .docs-prose h4:hover .header-anchor {
-      opacity: 1;
+    .docs-prose h1 > .header-anchor:hover,
+    .docs-prose h2 > .header-anchor:hover,
+    .docs-prose h3 > .header-anchor:hover,
+    .docs-prose h4 > .header-anchor:hover {
+      color: inherit;
+      border-bottom: none;
     }
 
     /* ========== MOBILE ========== */
