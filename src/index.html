@@ -86,7 +86,7 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
 
       <div class="animate delay-5 relative">
         <div class="absolute -inset-0.5 rounded-[14px] bg-gradient-to-br from-cyan/15 via-transparent to-purple/10 -z-[1]"></div>
-        <img src="/assets/images/screenshots/chatexample.PNG" alt="ClawControl main chat interface"
+        <img src="/assets/images/screenshots/chat.png" alt="ClawControl main chat interface"
              class="w-full rounded-xl border border-white/[0.15] shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_30px_rgba(0,217,255,0.2)]">
       </div>
     </div>
@@ -154,17 +154,16 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
     </div>
 
     {% set desktopShots = [
-      { "src": "chatexample.PNG", "caption": "Chat with streaming markdown and tool calls" },
-      { "src": "sessions.PNG", "caption": "Session list with agent info" },
-      { "src": "agentdashboard.PNG", "caption": "Agent dashboard and configuration" },
-      { "src": "skillsdownload.PNG", "caption": "Skill browser with VirusTotal badges" },
-      { "src": "emptychat.PNG", "caption": "New chat interface" },
+      { "src": "chat.png", "caption": "Chat with streaming markdown and tool calls" },
+      { "src": "home.png", "caption": "Home screen" },
       { "src": "subagents.png", "caption": "Inline subagent status blocks" },
       { "src": "skillsearch.png", "caption": "ClawHub skill search" },
       { "src": "agent.png", "caption": "Agent profile and workspace files" },
+      { "src": "agentedit.png", "caption": "Agent configuration editor" },
       { "src": "cronjob.png", "caption": "Cron job management with live status" },
       { "src": "settings.png", "caption": "Server settings editor" },
       { "src": "connect.png", "caption": "Server connection setup" },
+      { "src": "skills.png", "caption": "Installed skills overview" },
       { "src": "nodes.png", "caption": "Node graph visualization" },
       { "src": "usage.png", "caption": "Token usage and analytics" }
     ] %}
@@ -200,13 +199,18 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
     </div>
 
     {% set mobileShots = [
-      { "src": "chatexampleios.PNG", "caption": "Chat with streaming markdown" },
-      { "src": "sessionsios.PNG", "caption": "Session list" },
-      { "src": "agentdashboardios.PNG", "caption": "Agent dashboard" },
-      { "src": "skillsdownloadios.PNG", "caption": "Skill browser with badges" },
-      { "src": "emptychatios.PNG", "caption": "New chat interface" },
+      { "src": "chatexample.PNG", "caption": "Chat with streaming markdown" },
+      { "src": "sessions.PNG", "caption": "Session list" },
+      { "src": "agentdashboard.PNG", "caption": "Agent dashboard" },
+      { "src": "skillsdownload.PNG", "caption": "Skill browser with badges" },
+      { "src": "emptychat.PNG", "caption": "New chat interface" },
       { "src": "skillsios.PNG", "caption": "Skills overview" },
-      { "src": "settingsios.jfif", "caption": "Settings" }
+      { "src": "chatexampleios.PNG", "caption": "Chat (iOS)" },
+      { "src": "sessionsios.PNG", "caption": "Session list (iOS)" },
+      { "src": "agentdashboardios.PNG", "caption": "Agent dashboard (iOS)" },
+      { "src": "skillsdownloadios.PNG", "caption": "Skill browser (iOS)" },
+      { "src": "emptychatios.PNG", "caption": "New chat (iOS)" },
+      { "src": "settingsios.jfif", "caption": "Settings (iOS)" }
     ] %}
 
     <div class="reveal carousel-wrapper relative" data-carousel="mobile">
