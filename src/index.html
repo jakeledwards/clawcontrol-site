@@ -86,7 +86,7 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
 
       <div class="animate delay-5 relative">
         <div class="absolute -inset-0.5 rounded-[14px] bg-gradient-to-br from-cyan/15 via-transparent to-purple/10 -z-[1]"></div>
-        <img src="/assets/images/screenshots/home.png" alt="ClawControl main chat interface"
+        <img src="/assets/images/screenshots/chatexample.PNG" alt="ClawControl main chat interface"
              class="w-full rounded-xl border border-white/[0.15] shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_30px_rgba(0,217,255,0.2)]">
       </div>
     </div>
@@ -145,20 +145,92 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
     <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">See it for yourself</h2>
     <p class="text-tsecondary text-base max-w-[560px] mb-16 leading-relaxed reveal">Dark-mode-first UI with streaming markdown, inline tool calls, and full skill management.</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {% set shots = [
-        { "src": "subagents.png", "caption": "Inline subagent status blocks with popout links" },
-        { "src": "skillsearch.png", "caption": "ClawHub skill browser with security scan badges" },
-        { "src": "agent.png", "caption": "Agent profile with config and workspace files" },
-        { "src": "cronjob.png", "caption": "Cron job management with live status" }
-      ] %}
-      {% for s in shots %}
-      <div class="reveal rounded-xl overflow-hidden border border-white/[0.08] transition-all duration-300 hover:border-cyan/25 hover:scale-[1.02] hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
-        <img src="/assets/images/screenshots/{{ s.src }}" alt="{{ s.caption }}" loading="lazy" class="w-full block">
-        <div class="px-5 py-4 bg-elevated font-mono text-[13px] text-tsecondary border-t border-white/[0.08]">{{ s.caption }}</div>
+    {# ---- Desktop Gallery ---- #}
+    <div class="reveal mb-6">
+      <div class="flex items-center gap-3 mb-5">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span class="font-mono text-sm font-semibold text-tprimary uppercase tracking-wider">Desktop</span>
       </div>
-      {% endfor %}
     </div>
+
+    {% set desktopShots = [
+      { "src": "chatexample.PNG", "caption": "Chat with streaming markdown and tool calls" },
+      { "src": "sessions.PNG", "caption": "Session list with agent info" },
+      { "src": "agentdashboard.PNG", "caption": "Agent dashboard and configuration" },
+      { "src": "skillsdownload.PNG", "caption": "Skill browser with VirusTotal badges" },
+      { "src": "emptychat.PNG", "caption": "New chat interface" },
+      { "src": "subagents.png", "caption": "Inline subagent status blocks" },
+      { "src": "skillsearch.png", "caption": "ClawHub skill search" },
+      { "src": "agent.png", "caption": "Agent profile and workspace files" },
+      { "src": "cronjob.png", "caption": "Cron job management with live status" },
+      { "src": "settings.png", "caption": "Server settings editor" },
+      { "src": "connect.png", "caption": "Server connection setup" },
+      { "src": "nodes.png", "caption": "Node graph visualization" },
+      { "src": "usage.png", "caption": "Token usage and analytics" }
+    ] %}
+
+    <div class="reveal carousel-wrapper relative" data-carousel="desktop">
+      <div class="carousel-track flex transition-transform duration-500 ease-out" style="gap: 1.5rem;">
+        {% for s in desktopShots %}
+        <div class="carousel-slide flex-shrink-0 w-full md:w-[calc(50%-0.75rem)] rounded-xl overflow-hidden border border-white/[0.08] transition-all duration-300 hover:border-cyan/25">
+          <img src="/assets/images/screenshots/{{ s.src }}" alt="{{ s.caption }}" loading="lazy" class="w-full block">
+          <div class="px-5 py-4 bg-elevated font-mono text-[13px] text-tsecondary border-t border-white/[0.08]">{{ s.caption }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="flex items-center justify-between mt-6">
+        <div class="flex gap-2 carousel-dots"></div>
+        <div class="flex gap-3">
+          <button class="carousel-prev w-10 h-10 rounded-full border border-white/[0.15] bg-elevated flex items-center justify-center text-tsecondary transition-all hover:border-cyan hover:text-cyan hover:shadow-[0_0_15px_rgba(0,217,255,0.15)] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer" aria-label="Previous">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="carousel-next w-10 h-10 rounded-full border border-white/[0.15] bg-elevated flex items-center justify-center text-tsecondary transition-all hover:border-cyan hover:text-cyan hover:shadow-[0_0_15px_rgba(0,217,255,0.15)] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer" aria-label="Next">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {# ---- Mobile Gallery ---- #}
+    <div class="reveal mt-20 mb-6">
+      <div class="flex items-center gap-3 mb-5">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+        <span class="font-mono text-sm font-semibold text-tprimary uppercase tracking-wider">Mobile</span>
+      </div>
+    </div>
+
+    {% set mobileShots = [
+      { "src": "chatexampleios.PNG", "caption": "Chat with streaming markdown" },
+      { "src": "sessionsios.PNG", "caption": "Session list" },
+      { "src": "agentdashboardios.PNG", "caption": "Agent dashboard" },
+      { "src": "skillsdownloadios.PNG", "caption": "Skill browser with badges" },
+      { "src": "emptychatios.PNG", "caption": "New chat interface" },
+      { "src": "skillsios.PNG", "caption": "Skills overview" },
+      { "src": "settingsios.jfif", "caption": "Settings" }
+    ] %}
+
+    <div class="reveal carousel-wrapper relative" data-carousel="mobile">
+      <div class="carousel-track flex transition-transform duration-500 ease-out" style="gap: 1.5rem;">
+        {% for s in mobileShots %}
+        <div class="carousel-slide flex-shrink-0 w-[55%] sm:w-[40%] md:w-[28%] lg:w-[22%] rounded-xl overflow-hidden border border-white/[0.08] transition-all duration-300 hover:border-cyan/25">
+          <img src="/assets/images/screenshots/{{ s.src }}" alt="{{ s.caption }}" loading="lazy" class="w-full block">
+          <div class="px-4 py-3 bg-elevated font-mono text-[12px] text-tsecondary border-t border-white/[0.08]">{{ s.caption }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="flex items-center justify-between mt-6">
+        <div class="flex gap-2 carousel-dots"></div>
+        <div class="flex gap-3">
+          <button class="carousel-prev w-10 h-10 rounded-full border border-white/[0.15] bg-elevated flex items-center justify-center text-tsecondary transition-all hover:border-cyan hover:text-cyan hover:shadow-[0_0_15px_rgba(0,217,255,0.15)] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer" aria-label="Previous">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="carousel-next w-10 h-10 rounded-full border border-white/[0.15] bg-elevated flex items-center justify-center text-tsecondary transition-all hover:border-cyan hover:text-cyan hover:shadow-[0_0_15px_rgba(0,217,255,0.15)] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer" aria-label="Next">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -322,11 +394,86 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
 
 <script>
   function handleBetaSubmit() {
-    // The form POSTs to Google Forms via the hidden iframe.
-    // After a short delay (to let the POST fire), show the success state.
     setTimeout(() => {
       document.getElementById('formSuccess').classList.remove('hidden');
       document.getElementById('betaForm').classList.add('hidden');
     }, 500);
   }
+
+  // Carousel logic
+  document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+    const track = wrapper.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const prevBtn = wrapper.querySelector('.carousel-prev');
+    const nextBtn = wrapper.querySelector('.carousel-next');
+    const dotsContainer = wrapper.querySelector('.carousel-dots');
+    let current = 0;
+    let slidesPerView = 1;
+    let touchStartX = 0;
+    let touchDiff = 0;
+
+    function calcSlidesPerView() {
+      if (slides.length === 0) return 1;
+      const wrapperW = wrapper.offsetWidth;
+      const slideW = slides[0].offsetWidth;
+      const gap = 24; // 1.5rem
+      return Math.max(1, Math.floor((wrapperW + gap) / (slideW + gap)));
+    }
+
+    function maxIndex() {
+      return Math.max(0, slides.length - slidesPerView);
+    }
+
+    function buildDots() {
+      dotsContainer.innerHTML = '';
+      const count = maxIndex() + 1;
+      for (let i = 0; i < count; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === current ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function update() {
+      if (slides.length === 0) return;
+      const slideW = slides[0].offsetWidth;
+      const gap = 24;
+      track.style.transform = 'translateX(' + (-(slideW + gap) * current) + 'px)';
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= maxIndex();
+      dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(index, maxIndex()));
+      update();
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    // Touch/swipe support
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchmove', e => { touchDiff = e.touches[0].clientX - touchStartX; }, { passive: true });
+    track.addEventListener('touchend', () => {
+      if (Math.abs(touchDiff) > 50) {
+        goTo(current + (touchDiff < 0 ? 1 : -1));
+      }
+      touchDiff = 0;
+    });
+
+    function init() {
+      slidesPerView = calcSlidesPerView();
+      current = Math.min(current, maxIndex());
+      buildDots();
+      update();
+    }
+
+    init();
+    window.addEventListener('resize', init);
+  });
 </script>
