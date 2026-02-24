@@ -19,6 +19,7 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
 
     <ul class="nav-links flex items-center gap-8 list-none max-sm:hidden">
       <li><a href="/docs/" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Docs</a></li>
+      <li><a href="#whats-new" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">What's New</a></li>
       <li><a href="#features" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Features</a></li>
       <li><a href="#screenshots" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Screenshots</a></li>
       <li><a href="#download" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Download</a></li>
@@ -59,7 +60,7 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
       <div class="lg:text-left text-center">
         <div class="animate delay-1 inline-flex items-center gap-2 px-3.5 py-1.5 bg-cyan/[0.08] border border-cyan/20 rounded-full font-mono text-xs text-cyan tracking-wider mb-6">
           <span class="w-1.5 h-1.5 bg-green-500 rounded-full" style="animation: pulse-dot 2s ease-in-out infinite"></span>
-          v{{ site.version }} &mdash; Now with mobile support
+          v{{ site.version }} &mdash; Images, voice, usage charts &amp; more
         </div>
 
         <h1 class="animate delay-2 font-mono text-[clamp(36px,5vw,56px)] font-bold leading-[1.1] tracking-tight mb-6">
@@ -93,6 +94,58 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
   </div>
 </section>
 
+{# ========== WHAT'S NEW ========== #}
+<section id="whats-new" class="py-24 bg-primary border-y border-white/[0.08]">
+  <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
+    <div class="font-mono text-xs uppercase tracking-[2px] text-cyan mb-4 reveal">// what's new</div>
+    <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">v1.3.1 Release</h2>
+    <p class="text-tsecondary text-base max-w-[560px] mb-12 leading-relaxed reveal">Media, voice, visibility, and packaging &mdash; this release makes ClawControl richer and more reliable across every platform.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {% set newFeatures = [
+        { "icon": "image", "title": "Image Chat", "desc": "Send and receive images in chat (PNG, JPG, GIF, WebP) with inline previews and a full gallery view." },
+        { "icon": "mic", "title": "Voice Dictation", "desc": "Wake-word triggered voice input in the composer. Available on Android and in supported browsers." },
+        { "icon": "chart", "title": "Usage Charts", "desc": "Daily cost tracking with token/cost bar charts and activity heatmaps to monitor your AI spend." },
+        { "icon": "pin", "title": "Pinned Sessions", "desc": "Keep important conversations at the top of the sidebar for quick access." },
+        { "icon": "calendar", "title": "Cron Job Creation", "desc": "Create scheduled tasks directly from the app UI, not just view them." },
+        { "icon": "key", "title": "Device Pairing", "desc": "Ed25519 device identity with secure pairing, friendly device names, and copy/share support." },
+        { "icon": "linux", "title": "Linux Packaging", "desc": "AppImage and .deb targets now included alongside Windows and macOS builds." },
+        { "icon": "shield", "title": "Security Hardening", "desc": "Insecure auth mode removed. Proper allowed-origins enforcement for self-hosted OpenClaw servers." },
+        { "icon": "zap", "title": "Reliability Fixes", "desc": "Better WebSocket health checks, auto-retry, fixed stream isolation, and numerous mobile layout fixes." }
+      ] %}
+
+      {% for f in newFeatures %}
+      <div class="reveal group bg-elevated border border-white/[0.08] rounded-xl p-7 transition-all duration-300 relative overflow-hidden hover:border-cyan/20 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.3)]">
+        <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <div class="w-10 h-10 rounded-[10px] flex items-center justify-center mb-4 bg-cyan/[0.08] border border-cyan/[0.15]">
+          {% if f.icon == "image" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          {% elif f.icon == "mic" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          {% elif f.icon == "chart" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          {% elif f.icon == "pin" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M12 17v5"/><path d="M9 11l-4 4h14l-4-4V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v7z"/></svg>
+          {% elif f.icon == "calendar" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
+          {% elif f.icon == "key" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          {% elif f.icon == "linux" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="#00d9ff"><path d="M12.504 0c-.155 0-.311.01-.465.035-.782.14-1.293.87-1.13 1.596.198.91.818 2.16 1.184 3.01.168.38.09.85-.227 1.1L9.66 7.42C8.32 6.59 6.73 6.1 5 6.1c-1.85 0-3.55.57-4.97 1.53.03.05.07.1.1.15.58-.39 1.27-.66 2.02-.78.09-.02.18-.03.27-.03.73 0 1.39.39 1.76 1 .13.2.22.42.28.66.1.4.12.83.04 1.23-.12.6-.44 1.13-.89 1.5-.42.35-.94.58-1.5.65-.36.05-.73.03-1.08-.06-.28-.07-.55-.19-.79-.34-.07.16-.14.33-.2.5-.05.16-.1.32-.14.49.31.16.64.28.99.35.52.11 1.06.12 1.59.03.76-.13 1.46-.47 2.02-.96.56-.5.96-1.14 1.14-1.87.1-.43.13-.89.06-1.34-.04-.27-.11-.54-.22-.79l2.63-1.81c.5-.34 1.14-.39 1.68-.12.17.09.33.21.46.35l.93.97c.35.36.53.85.5 1.36l-.38 5.07c-.03.44.07.88.29 1.27l2.36 4.14c.22.38.33.82.33 1.26v2.76c0 .46-.17.91-.47 1.26l-1.46 1.68c-.33.38-.51.86-.51 1.36v.31c0 .58.38 1.09.93 1.26l.57.17c.3.09.53.33.6.63.08.3-.02.62-.25.83l-.73.67c-.4.37-.63.89-.63 1.44 0 .26.05.51.15.75"/>
+          </svg>
+          {% elif f.icon == "shield" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          {% elif f.icon == "zap" %}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          {% endif %}
+        </div>
+        <h3 class="font-mono text-[15px] font-semibold mb-2 text-tprimary">{{ f.title }}</h3>
+        <p class="text-sm text-tsecondary leading-relaxed">{{ f.desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="mt-10 reveal">
+      <a href="https://github.com/jakeledwards/ClawControl/releases/tag/v1.3.1" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 font-mono text-sm text-cyan no-underline hover:underline transition-colors">
+        Full release notes on GitHub
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 {# ========== FEATURES ========== #}
 <section id="features" class="py-24">
   <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
@@ -107,11 +160,11 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
         { "icon": "gear", "title": "Server Settings", "desc": "Full-page editor for your OpenClaw server configuration. Agent defaults, tools, memory backends, and channel policies." },
         { "icon": "monitor", "title": "Subagent Spawning", "desc": "Spawn isolated subagent sessions for parallel task execution. Inline status blocks with popout windows for each subagent." },
         { "icon": "layers", "title": "ClawHub Skills", "desc": "Browse, search, and install skills from ClawHub. VirusTotal security scan badges, download counts, and one-click install." },
-        { "icon": "chat", "title": "Thinking Mode", "desc": "Toggle extended thinking for complex tasks. See the agent's reasoning process displayed inline as it works through problems." },
+        { "icon": "chat", "title": "Image &amp; Voice Chat", "desc": "Send and receive images inline with gallery view. Wake-word voice dictation on Android and browsers for hands-free input." },
         { "icon": "wrench", "title": "Tool Visibility", "desc": "See every tool call inline as the agent works. Full transparency into code execution, web searches, and file operations." },
         { "icon": "users", "title": "Agent Management", "desc": "Create, configure, and delete agents. Browse agent profiles, workspace files, and per-session identity switching." },
-        { "icon": "clock", "title": "Cron Jobs", "desc": "View and manage scheduled tasks with live status updates. Pause, resume, and inspect cron job details and run history." },
-        { "icon": "phone", "title": "Cross-Platform", "desc": "Runs everywhere. Windows and macOS via Electron, Android on the Play Store, iOS coming soon. One codebase, full native feel." }
+        { "icon": "clock", "title": "Cron Jobs", "desc": "Create, view, and manage scheduled tasks with live status updates. Pause, resume, and inspect cron job details and run history." },
+        { "icon": "phone", "title": "Cross-Platform", "desc": "Runs everywhere. Windows, macOS, and Linux on desktop. Android on the Play Store, iOS coming soon. One codebase, full native feel." }
       ] %}
 
       {% for f in features %}
@@ -243,9 +296,9 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
   <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
     <div class="font-mono text-xs uppercase tracking-[2px] text-cyan mb-4 reveal">// download</div>
     <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">Get ClawControl</h2>
-    <p class="text-tsecondary text-base max-w-[560px] mb-12 leading-relaxed reveal">Pre-built binaries for desktop. Android is live on the Play Store &mdash; iOS coming soon.</p>
+    <p class="text-tsecondary text-base max-w-[560px] mb-12 leading-relaxed reveal">Pre-built binaries for desktop and mobile. Android is live on the Play Store &mdash; iOS coming soon.</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {# Windows #}
       <div class="reveal bg-primary border border-white/[0.08] rounded-[14px] p-9 text-center transition-all duration-300 hover:border-cyan/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
         <div class="mb-4">
@@ -275,6 +328,21 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
         <p class="text-tsecondary text-sm mb-6">macOS 12+ &mdash; Universal</p>
         <div class="flex flex-col gap-2.5">
           <a href="https://github.com/jakeledwards/ClawControl/releases" target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2.5 px-5 py-3 bg-cyan text-deep rounded-[10px] font-mono text-[13px] font-medium no-underline transition-all hover:bg-[#33e1ff] hover:shadow-[var(--glow-cyan)] hover:-translate-y-0.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            View Releases
+          </a>
+        </div>
+      </div>
+      {# Linux #}
+      <div class="reveal bg-primary border border-white/[0.08] rounded-[14px] p-9 text-center transition-all duration-300 hover:border-cyan/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+        <div class="mb-4">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="#00d9ff"><path d="M12.503 18.004s-.665.742-1.404.742c-.596 0-.903-.424-.903-.852 0-.374.208-.712.583-.712.373 0 .722.208 1.106.596l.618.226zM20.61 16.122c-.246 0-.902-.167-1.556-.167-.654 0-1.793.217-2.604.217-.404 0-.727-.082-.937-.247l-.382.156c.156.445.606.742 1.275.742.596 0 1.584-.217 2.316-.217.73 0 1.397.167 1.643.167.312 0 .52-.156.52-.39 0-.155-.117-.261-.275-.261zM7.553 12.787c-.596 0-.959.445-1.124 1.15l2.04.537c.089-.374.133-.72.133-1.01 0-.382-.15-.677-.379-.677h-.67zM12 2C6.477 2 2 6.477 2 12c0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zm-.096 4.645c.46 0 .904.457.904 1.188 0 .853-.538 1.94-1.378 1.94-.46 0-.904-.458-.904-1.189 0-.853.538-1.94 1.378-1.94zm-3.93 3.93c.372 0 .67.303.67.677 0 .29-.045.636-.133 1.01l-2.04-.538c.165-.705.528-1.15 1.124-1.15h.379zm6.51 9.133c-.783 0-1.404-.742-1.404-.742l-.618-.226c-.384-.388-.733-.596-1.106-.596-.375 0-.583.338-.583.712 0 .428.307.852.903.852.739 0 1.404-.742 1.404-.742l.618.226c.384.388.733.596 1.106.596.375 0 .583-.338.583-.712 0-.428-.307-.852-.903-.852v.684zm2.573-4.346c-.246 0-.913-.167-1.643-.167-.732 0-1.72.217-2.316.217-.669 0-1.119-.297-1.275-.742l.382-.156c.21.165.533.247.937.247.811 0 1.95-.217 2.604-.217.654 0 1.31.167 1.556.167.158 0 .275.106.275.261 0 .234-.208.39-.52.39z"/></svg>
+        </div>
+        <h3 class="font-mono text-xl font-semibold mb-2">Linux</h3>
+        <p class="text-tsecondary text-sm mb-6">AppImage &amp; .deb</p>
+        <div class="flex flex-col gap-2.5">
+          <a href="https://github.com/jakeledwards/ClawControl/releases/tag/v{{ site.version }}" target="_blank" rel="noopener"
              class="inline-flex items-center justify-center gap-2.5 px-5 py-3 bg-cyan text-deep rounded-[10px] font-mono text-[13px] font-medium no-underline transition-all hover:bg-[#33e1ff] hover:shadow-[var(--glow-cyan)] hover:-translate-y-0.5">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             View Releases
