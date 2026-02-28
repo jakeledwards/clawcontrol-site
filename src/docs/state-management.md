@@ -28,8 +28,10 @@ These fields survive page reloads (stored in `localStorage` key `clawcontrol-sto
 | `thinkingEnabled` | `boolean` | `false` | Extended thinking mode |
 | `notificationsEnabled` | `boolean` | `false` | Desktop notifications |
 | `rightPanelWidth` | `number` | `320` | Right panel width (px) |
+| `serverProfiles` | `ServerProfile[]` | `[]` | Saved server connection profiles |
+| `activeProfileId` | `string \| null` | `null` | Currently active server profile |
 
-> **Note:** `gatewayToken` is NOT persisted in Zustand. It's stored in platform-specific secure storage (Electron safeStorage / Capacitor Preferences).
+> **Note:** `gatewayToken` is NOT persisted in Zustand. It's stored in platform-specific secure storage (Electron safeStorage / Capacitor Preferences). Each server profile stores its own token independently.
 
 ### Runtime State
 
@@ -131,6 +133,16 @@ type MainView =
 | `connect()` | Create client and connect to server |
 | `disconnect()` | Close WebSocket and clear state |
 | `retryConnect()` | Clear pairing state and reconnect |
+
+### Server Profiles
+
+| Action | Description |
+|---|---|
+| `addServerProfile(profile)` | Add a new server profile |
+| `updateServerProfile(id, updates)` | Update an existing profile |
+| `deleteServerProfile(id)` | Remove a profile |
+| `setActiveProfileId(id)` | Switch active profile |
+| `getActiveProfile()` | Get the current active profile |
 
 ### Sessions
 

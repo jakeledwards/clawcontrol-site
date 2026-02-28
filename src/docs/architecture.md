@@ -232,6 +232,14 @@ When the server sends events for a session, the first event type (`chat` or `age
 
 The server sends `data.text` as cumulative per-content-block. When a tool call boundary resets the text counter, the client detects the rewind and accumulates with `\n\n` separators instead of replacing.
 
+### Content Filtering
+
+Both the streaming path and `chat.history` filter out noise before it reaches the UI:
+- **Heartbeat messages** (`HEARTBEAT_OK`, `HEARTBEAT.MD`, `CRON: HEARTBEAT`) are dropped entirely
+- **Noise content** (`NO_REPLY`, `no_reply`) is suppressed
+- **System notifications** (exec status lines) are stripped from message text
+- **`toolResult` role messages** are hidden (tool output is shown via tool call cards)
+
 ### Parent Session Tracking
 
 `parentSessionKeys: Set<string>` tracks sessions the user has sent messages to. Events from unknown sessions trigger subagent detection, which emits `subagentDetected` events for the UI to display inline SubagentBlock components.
@@ -254,6 +262,8 @@ AppState {
   thinkingEnabled: boolean
   notificationsEnabled: boolean
   rightPanelWidth: number
+  serverProfiles: ServerProfile[]
+  activeProfileId: string | null
 
   // Runtime (not persisted)
   connected: boolean
@@ -277,7 +287,8 @@ AppState {
 
 - **Secure tokens**: Electron safeStorage (encrypted) / Capacitor Preferences / localStorage
 - **UI preferences**: Zustand `persist` middleware to localStorage key `clawcontrol-storage`
-- **Session messages**: In-memory cache (`_sessionMessagesCache: Map`) for instant session switching
+- **Server profiles**: Persisted in Zustand with per-profile token storage for multi-server connections
+- **Session messages**: In-memory cache (`_sessionMessagesCache: Map`, LRU, max 20 entries) for instant session switching
 - **Gateway token**: Migrated from localStorage to secure storage on first load; legacy entry cleaned up
 
 ---

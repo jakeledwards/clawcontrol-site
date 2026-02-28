@@ -1,6 +1,6 @@
 ---
 title: Component Reference
-description: "Catalog of all 25+ React components with purpose, features, store dependencies, and sub-components."
+description: "Catalog of all 26+ React components with purpose, features, store dependencies, and sub-components."
 ---
 
 # Component Reference
@@ -18,6 +18,16 @@ ClawDesk's UI is built with React 18 and organized into layout components, detai
 Root application component. Orchestrates the entire layout, initializes the app, applies theme, and sets up mobile-specific listeners (keyboard, back button, app lifecycle).
 
 **View routing:** Renders the appropriate detail view based on `mainView` store state.
+
+### `ServerProfileTabs` (`src/components/ServerProfileTabs.tsx`)
+
+Tabbed UI above the sidebar for switching between saved server profiles. Each profile stores its own server URL and authentication token, enabling quick switching between multiple OpenClaw servers.
+
+**Features:**
+- Tab bar with profile names and add/remove controls
+- Per-profile token storage (isolated credentials)
+- Active profile indicator
+- Inline profile creation
 
 ### `Sidebar` (`src/components/Sidebar.tsx`)
 
