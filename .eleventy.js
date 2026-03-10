@@ -7,6 +7,11 @@ export default function(eleventyConfig) {
 
   eleventyConfig.addPlugin(syntaxHighlight);
 
+  // Sitemap filter
+  eleventyConfig.addFilter("isoDate", (date) => {
+    return new Date(date).toISOString().split("T")[0];
+  });
+
   eleventyConfig.amendLibrary("md", (mdLib) => {
     mdLib.set({ html: true, linkify: true, typographer: true });
     mdLib.use(markdownItAnchor, {

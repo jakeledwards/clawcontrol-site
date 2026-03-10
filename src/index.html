@@ -98,20 +98,20 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
 <section id="whats-new" class="py-24 bg-primary border-y border-white/[0.08]">
   <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
     <div class="font-mono text-xs uppercase tracking-[2px] text-cyan mb-4 reveal">// what's new</div>
-    <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">v1.4.0 Release</h2>
-    <p class="text-tsecondary text-base max-w-[560px] mb-12 leading-relaxed reveal">Server profiles, exec approvals, connection resilience, and reliability fixes &mdash; ClawControl is more robust and polished than ever.</p>
+    <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">v1.5.0 Release</h2>
+    <p class="text-tsecondary text-base max-w-[560px] mb-12 leading-relaxed reveal">Node mode, multi-connection WebSocket pool, TTS audio streaming, and Android reliability &mdash; ClawControl goes deeper with agent-invoked device commands.</p>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {% set newFeatures = [
-        { "icon": "key", "title": "Server Profiles", "desc": "Per-profile token storage and tabbed sidebar UI for managing multiple OpenClaw server connections." },
-        { "icon": "shield", "title": "Exec Approvals", "desc": "Allow or deny agent actions directly in-app with an inline approval UI for safe exec control." },
-        { "icon": "zap", "title": "Response Watchdog", "desc": "Automatic detection of stale connections with recovery, so chats never silently hang." },
-        { "icon": "chart", "title": "Agent Dashboard", "desc": "Live activity grid showing all agents with real-time status at a glance." },
-        { "icon": "mic", "title": "TTS Audio Player", "desc": "Inline audio playback for text-to-speech responses directly in the chat stream." },
-        { "icon": "image", "title": "Streaming Toggle", "desc": "Disable real-time token display for a cleaner chat experience when you prefer final output only." },
-        { "icon": "pin", "title": "Universal macOS", "desc": "Single universal build for both Intel and Apple Silicon Macs via electron-builder." },
-        { "icon": "calendar", "title": "Message Cache Fix", "desc": "Fixed infinite recursion bug that caused empty chats after overnight use. Session switching is now instant." },
-        { "icon": "linux", "title": "Mobile Reliability", "desc": "WebSocket race fixes, stale callback cleanup, Android swipe and autocorrect fixes, and TOFU improvements." }
+        { "icon": "zap", "title": "Node Mode", "desc": "Parallel WebSocket connection lets agents invoke device commands directly, with a permissions dialog for user control." },
+        { "icon": "shield", "title": "Node Permissions", "desc": "Granular permission grants for agent-invoked device commands with approve/deny UI and sync across sessions." },
+        { "icon": "chart", "title": "WebSocket Pool", "desc": "Multi-connection WebSocket pool for resilient parallel communication between desktop, mobile, and server." },
+        { "icon": "mic", "title": "TTS Audio Streaming", "desc": "Fixed TTS playback pipeline with CSP-safe audio, MEDIA streaming, subagent delivery, and expired-URL fallback." },
+        { "icon": "image", "title": "Image Rendering", "desc": "Base64 data URL support, media route fixes, and filtered streaming of image data for clean chat display." },
+        { "icon": "key", "title": "Android Background", "desc": "Foreground service keeps node-mode WebSocket alive when the app is backgrounded on Android." },
+        { "icon": "calendar", "title": "E2E Test Suite", "desc": "Playwright end-to-end tests with a mock OpenClaw v3 WebSocket server for automated UI validation." },
+        { "icon": "pin", "title": "Android IME Fixes", "desc": "Resolved swipe-to-type lag, keyboard STT conflicts, and composition edge cases on Android input methods." },
+        { "icon": "linux", "title": "Cron & Mobile Fixes", "desc": "Corrected cron job RPC params, mobile WebSocket origin headers, and off-main-thread connect/disconnect on Android." }
       ] %}
 
       {% for f in newFeatures %}
@@ -137,7 +137,7 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
     </div>
 
     <div class="mt-10 reveal">
-      <a href="https://github.com/jakeledwards/ClawControl/releases/tag/v1.4.0" target="_blank" rel="noopener"
+      <a href="https://github.com/jakeledwards/ClawControl/releases/tag/v1.5.0" target="_blank" rel="noopener"
          class="inline-flex items-center gap-2 font-mono text-sm text-cyan no-underline hover:underline transition-colors">
         Full release notes on GitHub
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>

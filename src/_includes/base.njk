@@ -26,6 +26,57 @@
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta property="og:image" content="{{ site.url }}/assets/images/screenshots/chat.png">
 
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Windows, macOS, Linux, Android",
+    "description": "{{ description or 'ClawControl is a cross-platform desktop and mobile client for OpenClaw AI assistant.' }}",
+    "softwareVersion": "{{ site.version }}",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "screenshot": "{{ site.url }}/assets/images/screenshots/chat.png",
+    "downloadUrl": "{{ site.github }}/releases",
+    "license": "https://opensource.org/licenses/MIT",
+    "image": "{{ site.url }}/assets/images/icon.png"
+  }
+  </script>
+  {% if page.url == "/" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}",
+    "description": "{{ description or 'Cross-platform client for OpenClaw AI assistant.' }}",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ site.url }}/docs/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}",
+    "logo": "{{ site.url }}/assets/images/icon.png",
+    "sameAs": [
+      "{{ site.github }}"
+    ]
+  }
+  </script>
+  {% endif %}
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
