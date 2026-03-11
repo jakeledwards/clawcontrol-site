@@ -23,7 +23,6 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
       <li><a href="#features" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Features</a></li>
       <li><a href="#screenshots" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Screenshots</a></li>
       <li><a href="#download" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Download</a></li>
-      <li><a href="#beta" class="font-mono text-[13px] text-tsecondary uppercase tracking-wider hover:text-cyan no-underline transition-colors">Beta</a></li>
       <li>
         <a href="{{ site.github }}" target="_blank" rel="noopener"
            class="inline-flex items-center gap-2 px-4 py-2 border border-white/[0.15] rounded-lg font-mono text-[13px] text-tprimary no-underline transition-all hover:border-cyan hover:shadow-[0_0_20px_rgba(0,217,255,0.25)]">
@@ -368,54 +367,6 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
   </div>
 </section>
 
-{# ========== BETA SIGNUP (Google Form) ========== #}
-<section id="beta" class="py-24 bg-primary border-y border-white/[0.08]">
-  <div class="max-w-[600px] mx-auto px-6 text-center relative z-[1]">
-    <div class="reveal inline-flex items-center gap-2 px-3.5 py-1.5 bg-purple/10 border border-purple/25 rounded-full font-mono text-xs text-purple tracking-wider mb-6">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
-      iOS Beta
-    </div>
-    <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">Get it on the App Store</h2>
-    <p class="text-tsecondary text-base mb-10 leading-relaxed reveal">
-      ClawControl for iOS and Android is now live on the <a href="https://apps.apple.com/app/clawcontrol-client-ui/id6759070068" target="_blank" rel="noopener" class="text-cyan hover:underline">App Store</a> and <a href="https://play.google.com/store/apps/details?id=com.claw.control&hl=en_US" target="_blank" rel="noopener" class="text-cyan hover:underline">Play Store</a>.
-    </p>
-
-    {# Success state (shown after submit) #}
-    <div id="formSuccess" class="hidden text-center py-10 px-5">
-      <div class="w-14 h-14 bg-green-500/10 border-2 border-green-500 rounded-full inline-flex items-center justify-center mb-5 text-2xl text-green-500">&#10003;</div>
-      <h3 class="font-mono text-xl mb-2">You're on the list</h3>
-      <p class="text-tsecondary text-sm">We'll email you about future updates.</p>
-    </div>
-
-    {# Google Form submitted via hidden iframe #}
-    <iframe name="google-form-target" id="googleFormTarget" class="hidden"></iframe>
-
-    <form id="betaForm" class="reveal text-left"
-          action="{{ site.googleFormAction }}"
-          method="POST"
-          target="google-form-target"
-          onsubmit="handleBetaSubmit()">
-
-      <div class="mb-5">
-        <label for="email" class="block font-mono text-[13px] text-tsecondary mb-2 tracking-wide">Email address</label>
-        <input type="email"
-               id="email"
-               name="{{ site.googleFormEmailField }}"
-               placeholder="you@example.com"
-               required
-               class="w-full px-[18px] py-3.5 bg-elevated border border-white/[0.15] rounded-[10px] text-tprimary font-mono text-sm outline-none transition-all focus:border-cyan focus:shadow-[0_0_0_3px_rgba(0,217,255,0.1)] placeholder:text-tmuted">
-      </div>
-
-      <input type="hidden" name="{{ site.googleFormOsField }}" value="iOS">
-
-      <button type="submit"
-              class="w-full py-4 bg-purple text-white border-none rounded-[10px] font-mono text-sm font-semibold cursor-pointer transition-all tracking-wide mt-2 hover:bg-[#b97aff] hover:shadow-[var(--glow-purple)] hover:-translate-y-0.5">
-        Get future update notifications
-      </button>
-      <p class="text-xs text-tmuted mt-4 text-center font-mono">No spam. We'll only email you about ClawControl updates.</p>
-    </form>
-  </div>
-</section>
 
 {# ========== TECH STACK ========== #}
 <section class="py-24">
@@ -465,13 +416,6 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
 </footer>
 
 <script>
-  function handleBetaSubmit() {
-    setTimeout(() => {
-      document.getElementById('formSuccess').classList.remove('hidden');
-      document.getElementById('betaForm').classList.add('hidden');
-    }, 500);
-  }
-
   // Carousel logic
   document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
     const track = wrapper.querySelector('.carousel-track');
