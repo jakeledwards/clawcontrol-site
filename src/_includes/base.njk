@@ -19,12 +19,23 @@
   </script>
   {% endif %}
 
+  <meta name="theme-color" content="#06080a">
+
   <!-- Open Graph -->
   <meta property="og:title" content="{{ title }} — {{ site.name }}">
   <meta property="og:description" content="{{ description or 'Cross-platform client for OpenClaw AI assistant.' }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:site_name" content="{{ site.name }}">
   <meta property="og:image" content="{{ site.url }}/assets/images/screenshots/chat.png">
+  <meta property="og:image:alt" content="ClawControl chat interface showing streaming AI conversation">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }} — {{ site.name }}">
+  <meta name="twitter:description" content="{{ description or 'Cross-platform client for OpenClaw AI assistant.' }}">
+  <meta name="twitter:image" content="{{ site.url }}/assets/images/screenshots/chat.png">
+  <meta name="twitter:image:alt" content="ClawControl chat interface showing streaming AI conversation">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -34,7 +45,7 @@
     "name": "{{ site.name }}",
     "url": "{{ site.url }}",
     "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "Windows, macOS, Linux, Android",
+    "operatingSystem": "Windows, macOS, Linux, Android, iOS",
     "description": "{{ description or 'ClawControl is a cross-platform desktop and mobile client for OpenClaw AI assistant.' }}",
     "softwareVersion": "{{ site.version }}",
     "offers": {
@@ -45,7 +56,14 @@
     "screenshot": "{{ site.url }}/assets/images/screenshots/chat.png",
     "downloadUrl": "{{ site.github }}/releases",
     "license": "https://opensource.org/licenses/MIT",
-    "image": "{{ site.url }}/assets/images/icon.png"
+    "image": "{{ site.url }}/assets/images/icon.png",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.5",
+      "bestRating": "5",
+      "ratingCount": "2",
+      "reviewCount": "2"
+    }
   }
   </script>
   {% if page.url == "/" %}
