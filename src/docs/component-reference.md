@@ -7,7 +7,7 @@ description: "Catalog of all 26+ React components with purpose, features, store 
 
 ## Overview
 
-ClawDesk's UI is built with React 18 and organized into layout components, detail views, modals, and specialized widgets. All state flows through a centralized Zustand store (`useStore()`).
+ClawControl's UI is built with React 18 and organized into layout components, detail views, modals, and specialized widgets. All state flows through a centralized Zustand store (`useStore()`).
 
 ---
 

@@ -7,7 +7,7 @@ description: "Complete Zustand store reference — all state fields, actions, se
 
 ## Overview
 
-ClawDesk uses **Zustand** for state management with the `persist` middleware for selective localStorage persistence. The store is defined in `src/store/index.ts` and accessed via the `useStore()` hook.
+ClawControl uses **Zustand** for state management with the `persist` middleware for selective localStorage persistence. The store is defined in `src/store/index.ts` and accessed via the `useStore()` hook.
 
 ---
 
@@ -46,6 +46,10 @@ These fields reset on page reload:
 | `client` | `OpenClawClient \| null` | Active WebSocket client |
 | `pairingStatus` | `'none' \| 'pending'` | Device pairing state |
 | `pairingDeviceId` | `string \| null` | Device ID for pairing |
+| `protocol` | `number \| null` | **v4**: Negotiated OpenClaw protocol version (3 or 4). `null` before handshake completes |
+| `version` | `string \| null` | **v4**: Server software version reported in `hello-ok` (e.g. `"2026.5.3"`) |
+| `hint` | `string \| null` | **v4**: Optional connection hint surfaced by the server (e.g. plugin status, startup notice) |
+| `authError` | `AuthErrorPayload \| null` | **v4**: Latest `authError` event for inline display in the Settings modal |
 
 #### UI State
 

@@ -26,7 +26,7 @@ Welcome to the ClawControl documentation. ClawControl is a cross-platform deskto
 
 ### API & Protocol
 
-- **[API Reference](api-reference/)** — Full OpenClaw Protocol v3 reference with all RPC methods, request/response types, server events, session key formats, and error handling conventions
+- **[API Reference](api-reference/)** — Full OpenClaw Protocol v4 reference (backward-compatible with v3) with all RPC methods, request/response types, server events, session key formats, and error handling conventions
 
 ### UI
 
@@ -75,7 +75,7 @@ Electron/Capacitor
   OpenClaw Client (lib/openclaw/)
      |
      v
-  WebSocket JSON-RPC v3
+  WebSocket JSON-RPC v4
      |
      v
   OpenClaw Server

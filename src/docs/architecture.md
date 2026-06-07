@@ -3,11 +3,11 @@ title: Architecture Guide
 description: "ClawControl system architecture — process structure, data flow, streaming, state management, authentication, platform abstraction, and security model."
 ---
 
-# ClawDesk Architecture Guide
+# ClawControl Architecture Guide
 
 ## Overview
 
-ClawDesk (ClawControl) is a cross-platform desktop and mobile client for the OpenClaw AI assistant platform. It communicates with an OpenClaw server via a custom WebSocket-based JSON-RPC protocol (v3), supporting real-time streaming, multi-agent conversations, and device pairing.
+ClawControl is a cross-platform desktop and mobile client for the OpenClaw AI assistant platform. It communicates with an OpenClaw server via a custom WebSocket-based JSON-RPC protocol (v4, backward-compatible with v3), supporting real-time streaming, multi-agent conversations, and device pairing.
 
 **Platforms:** Windows, macOS (Electron) | iOS, Android (Capacitor) | Web (browser)
 
@@ -18,7 +18,7 @@ ClawDesk (ClawControl) is a cross-platform desktop and mobile client for the Ope
 ```
                         +--------------------------+
                         |     OpenClaw Server       |
-                        |  (WebSocket JSON-RPC v3)  |
+                        |  (WebSocket JSON-RPC v4)  |
                         +-----+------+------+------+
                               |      |      |
                     TLS/WSS   |      |      |  TLS/WSS
@@ -217,10 +217,11 @@ Map<sessionKey, SessionStreamState>
 SessionStreamState {
   source: 'chat' | 'agent' | null   // First event type claims the session
   text: string                       // Accumulated text
-  mode: 'delta' | 'cumulative'      // Server text mode
+  mode: 'delta' | 'cumulative' | 'deltaText'  // Server text mode ('deltaText' = v4)
   blockOffset: number                // Content block boundary tracking
   started: boolean                   // Whether stream has begun
   runId: string | null               // Server run identifier
+  finalized: boolean                 // v4: true after chat:final — rejects late deltas
 }
 ```
 
@@ -228,9 +229,15 @@ SessionStreamState {
 
 When the server sends events for a session, the first event type (`chat` or `agent`) to arrive claims that session. Subsequent events of the other type are ignored to prevent duplicate content.
 
-### Cumulative Text Merging
+### Text Streaming (v3 vs v4)
 
-The server sends `data.text` as cumulative per-content-block. When a tool call boundary resets the text counter, the client detects the rewind and accumulates with `\n\n` separators instead of replacing.
+The client negotiates the protocol version at connect time and switches text-merging strategy accordingly:
+
+- **v3 — cumulative**: The server sends `data.text` as cumulative-per-content-block. When a tool call boundary resets the text counter, the client detects the rewind and accumulates with `\n\n` separators instead of replacing. `MEDIA:{id}` tokens arrive inline in text and must be stripped before render.
+
+- **v4 — true deltas**: The server emits `chat:deltaText` events with incremental segments. The client appends each segment directly, or replaces the active content block when the event carries `replace: true`. Media references arrive pre-stripped on a `mediaUrls` array. After `chat:final` lands for a content block, late `deltaText` events for the same block are guarded against and dropped — finalized text is immutable.
+
+A `chat:streamReplace` event (v4 only) replaces the entire active assistant body, used when the server retries or rewrites a generation.
 
 ### Content Filtering
 

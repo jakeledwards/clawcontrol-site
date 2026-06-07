@@ -59,7 +59,7 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
       <div class="lg:text-left text-center">
         <div class="animate delay-1 inline-flex items-center gap-2 px-3.5 py-1.5 bg-cyan/[0.08] border border-cyan/20 rounded-full font-mono text-xs text-cyan tracking-wider mb-6">
           <span class="w-1.5 h-1.5 bg-green-500 rounded-full" style="animation: pulse-dot 2s ease-in-out infinite"></span>
-          v{{ site.version }} &mdash; Server profiles, exec approvals &amp; reliability fixes
+          v{{ site.version }} &mdash; OpenClaw protocol v4 &amp; stream reliability
         </div>
 
         <h1 class="animate delay-2 font-mono text-[clamp(36px,5vw,56px)] font-bold leading-[1.1] tracking-tight mb-6">
@@ -98,19 +98,19 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
   <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
     <div class="font-mono text-xs uppercase tracking-[2px] text-cyan mb-4 reveal">// what's new</div>
     <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">v{{ site.version }} Release</h2>
-    <p class="text-tsecondary text-base max-w-[560px] mb-12 leading-relaxed reveal">Node mode, multi-connection WebSocket pool, TTS audio streaming, and Android reliability &mdash; ClawControl goes deeper with agent-invoked device commands.</p>
+    <p class="text-tsecondary text-base max-w-[560px] mb-12 leading-relaxed reveal">OpenClaw protocol v4, smarter reconnects, and a cleaner streaming pipeline &mdash; v1.8.0 is faster and more resilient on every platform.</p>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {% set newFeatures = [
-        { "icon": "zap", "title": "Node Mode", "desc": "Parallel WebSocket connection lets agents invoke device commands directly, with a permissions dialog for user control." },
-        { "icon": "shield", "title": "Node Permissions", "desc": "Granular permission grants for agent-invoked device commands with approve/deny UI and sync across sessions." },
-        { "icon": "chart", "title": "WebSocket Pool", "desc": "Multi-connection WebSocket pool for resilient parallel communication between desktop, mobile, and server." },
-        { "icon": "mic", "title": "TTS Audio Streaming", "desc": "Fixed TTS playback pipeline with CSP-safe audio, MEDIA streaming, subagent delivery, and expired-URL fallback." },
-        { "icon": "image", "title": "Image Rendering", "desc": "Base64 data URL support, media route fixes, and filtered streaming of image data for clean chat display." },
-        { "icon": "key", "title": "Android Background", "desc": "Foreground service keeps node-mode WebSocket alive when the app is backgrounded on Android." },
-        { "icon": "calendar", "title": "E2E Test Suite", "desc": "Playwright end-to-end tests with a mock OpenClaw v3 WebSocket server for automated UI validation." },
-        { "icon": "pin", "title": "Android IME Fixes", "desc": "Resolved swipe-to-type lag, keyboard STT conflicts, and composition edge cases on Android input methods." },
-        { "icon": "linux", "title": "Cron & Mobile Fixes", "desc": "Corrected cron job RPC params, mobile WebSocket origin headers, and off-main-thread connect/disconnect on Android." }
+        { "icon": "zap", "title": "Protocol v4", "desc": "Negotiates OpenClaw protocol v4 at the WebSocket handshake. New deltaText events and streamReplace deliver richer streaming." },
+        { "icon": "chart", "title": "Stream Reliability", "desc": "Killed runaway accumulation, triple-bubble ghosts, and post-finalization delta mutations. Cleaner output, every time." },
+        { "icon": "key", "title": "Smarter Reconnects", "desc": "Honors v4 retryAfterMs as a one-shot reconnect floor and treats UNAVAILABLE as retryable — no more thrashing on server restarts." },
+        { "icon": "shield", "title": "Auth Error Hints", "desc": "Authentication failures surface inline hints in the Settings modal so connection problems explain themselves at a glance." },
+        { "icon": "linux", "title": "True /reset", "desc": "Slash-command /reset now truly clears all session state — pending streams, accumulated buffers, and tool-call tracking." },
+        { "icon": "pin", "title": "Cleaner Chat", "desc": "Filters runtime context messages, gates v3 media scrub on v4 connections, and suppresses SERVER_STARTING from user errors." },
+        { "icon": "image", "title": "Subagent Polish", "desc": "Fixed disconnected viewer, wrong anchor position, and cross-session text leaking in subagent popout sessions." },
+        { "icon": "mic", "title": "Approve Command", "desc": "Extracted as its own component with copy-feedback state and cross-platform clipboard for approve/deny prompts." },
+        { "icon": "calendar", "title": "Protocol Visibility", "desc": "See the negotiated protocol version and connection details inline in the Settings modal — quick debugging built in." }
       ] %}
 
       {% for f in newFeatures %}

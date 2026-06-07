@@ -56,7 +56,7 @@ npm run mobile:android  # Build, sync, and open in Android Studio
 
 ## Configuration
 
-On first launch, ClawDesk opens the Settings modal. You need to configure:
+On first launch, ClawControl opens the Settings modal. You need to configure:
 
 1. **Server URL** — WebSocket URL of your OpenClaw server (e.g., `wss://your-server.example.com/ws`)
 2. **Authentication**
@@ -72,7 +72,7 @@ The app stores your token securely:
 
 For non-loopback connections, the server may require device pairing:
 
-1. ClawDesk generates an Ed25519 keypair on first connection
+1. ClawControl generates an Ed25519 keypair on first connection
 2. If pairing is required, the Settings modal shows a pairing command
 3. Run the displayed command on the server to approve the device
 4. Click "Retry Connection" after approving

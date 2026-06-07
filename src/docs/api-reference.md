@@ -1,13 +1,33 @@
 ---
 title: API Reference
-description: "Full OpenClaw Protocol v3 reference — all RPC methods, request/response types, server events, session key formats, and error handling."
+description: "Full OpenClaw Protocol v4 reference (backward-compatible with v3) — all RPC methods, request/response types, server events, session key formats, and error handling."
 ---
 
 # OpenClaw Protocol API Reference
 
 ## Overview
 
-ClawDesk communicates with an OpenClaw server using a custom WebSocket-based JSON-RPC protocol (v3). Messages are exchanged as JSON frames with three types: `req` (client requests), `res` (server responses), and `event` (server-pushed events).
+ClawControl communicates with an OpenClaw server using a custom WebSocket-based JSON-RPC protocol (v4, backward-compatible with v3). Messages are exchanged as JSON frames with three types: `req` (client requests), `res` (server responses), and `event` (server-pushed events). The protocol version is negotiated during the handshake; v4-aware servers emit `protocolVersion: 4` in `hello-ok` and unlock new events like `chat.deltaText`, `streamReplace`, and `authError`.
+
+---
+
+## Protocol Version
+
+v4 was introduced in OpenClaw `2026.5.x` and ClawControl `1.8.0`. The client always announces v4 capability in the `connect` request; the server signals support by returning `protocolVersion: 4` in `hello-ok`. v3 servers omit the field, and the client falls back to cumulative text and inline `MEDIA:` token handling.
+
+### What changes between v3 and v4
+
+| Concern | v3 | v4 |
+|---|---|---|
+| Streaming text | Cumulative `delta` / `message.content` per content block | True incremental `deltaText` events with optional `replace` |
+| Mid-stream rewrites | Client detects rewinds heuristically | Server emits `streamReplace` explicitly |
+| MEDIA references | Inline `MEDIA:{id}` tokens in text | Pre-stripped; `mediaUrls` array on `chat` events |
+| Auth failures mid-session | Reported as RPC errors only | `authError` event with structured `details` |
+| Reconnect backoff | Pure client-side exponential | Honors server `retryAfterMs` as one-shot floor |
+| Plugin discovery | Not exposed | `hello-ok.plugins` URLs |
+| Server version visibility | None | `hello-ok.version` and `hello-ok.protocolVersion` |
+
+The client tolerates both protocol levels on every connection. The Settings modal surfaces the negotiated version and any server-supplied `hint` for quick debugging.
 
 ---
 
@@ -85,11 +105,23 @@ Authenticates the client with the server.
 **Response Payload (hello-ok):**
 ```typescript
 {
+  // Auth (both v3 and v4)
   auth?: {
     deviceToken?: string      // Server-issued device token for reconnects
   }
+
+  // v4 additions (omitted by v3 servers)
+  protocolVersion?: 3 | 4     // Negotiated protocol version
+  version?: string            // Server software version (e.g. "2026.5.3")
+  hint?: string               // Optional connection hint (e.g. plugin status)
+  plugins?: {
+    webhooks?: string         // Plugin surface URL: incoming webhook receiver
+    media?: string            // Plugin surface URL: media gateway
+  }
 }
 ```
+
+Receiving `protocolVersion: 4` enables `chat.deltaText`, `streamReplace`, and `authError` handling in the client.
 
 **Error Codes:**
 - `NOT_PAIRED` — Device needs pairing approval
@@ -634,6 +666,40 @@ Complete message with canonical data.
 }
 ```
 
+#### `chat` (state: "deltaText") — v4 only
+
+True incremental text delta. Unlike v3's cumulative `delta`, the client appends each `deltaText` segment directly. When `replace: true`, it replaces the active content block instead of appending — used for mid-stream corrections.
+
+```typescript
+{
+  event: 'chat'
+  payload: {
+    state: 'deltaText'
+    sessionKey?: string
+    deltaText: string         // Incremental text segment
+    replace?: boolean         // When true, replace current active block instead of append
+    mediaUrls?: string[]      // Pre-stripped media references (v4 strips MEDIA: tokens here)
+  }
+}
+```
+
+After a `chat:final` arrives for a content block, late `deltaText` events for the same block are dropped — the v4 client never mutates finalized text.
+
+#### `chat` (state: "streamReplace") — v4 only
+
+Replaces the entire active assistant message body. The server emits this when retrying a generation or rewriting a partial answer.
+
+```typescript
+{
+  event: 'chat'
+  payload: {
+    state: 'streamReplace'
+    sessionKey?: string
+    content: string | ContentBlock[]
+  }
+}
+```
+
 ### Agent Events
 
 #### `agent` (stream: "assistant")
@@ -740,6 +806,31 @@ Agent lifecycle events.
 }
 ```
 
+### Auth Error Events — v4 only
+
+Emitted when the server rejects the connection or session mid-stream (token revoked, device untrusted, server unavailable). The client routes this through the store so the Settings modal can render an inline hint.
+
+```typescript
+{
+  event: 'authError'
+  payload: {
+    sessionKey?: string
+    error: {
+      code: 'UNAUTHORIZED' | 'DEVICE_UNTRUSTED' | 'UNAVAILABLE' | string
+      message: string
+      details?: {
+        reason?: string                    // Human-readable failure cause
+        canRetryWithDeviceToken?: boolean  // Hint: a fresh device token may succeed
+        recommendedNextStep?: string       // Server-supplied next action
+      }
+    }
+    retryAfterMs?: number                  // Suggested reconnect delay floor (see Error Handling Conventions)
+  }
+}
+```
+
+When `error.code === 'UNAVAILABLE'`, the client treats the failure as retryable and uses `retryAfterMs` as a one-shot floor on the next reconnect delay.
+
 ---
 
 ## Session Key Format
@@ -763,4 +854,6 @@ Session keys follow the pattern: `agent:{agentId}:{identifier}`
 - Health check interval: **15 seconds** (via `skills.status`)
 - Auto-reconnect: exponential backoff up to **30 seconds**, max **20 attempts**
 - Config patches require hash match for optimistic conflict detection
+- **v4**: Servers may include `retryAfterMs` on `UNAVAILABLE` errors or `authError` events. The client uses it as a **one-shot floor** on the reconnect delay (cleared after use; backoff resumes normally on the next failure).
+- **v4**: `authError` events with `error.code === 'UNAVAILABLE'` are treated as retryable and count toward the 20-attempt cap, not the immediate-failure path.
 - Silent error swallowing with `console.warn` for non-critical failures
