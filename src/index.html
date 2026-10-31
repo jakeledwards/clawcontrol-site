@@ -98,16 +98,16 @@ description: "ClawControl is a cross-platform desktop and mobile client for Open
   <div class="max-w-[1140px] mx-auto px-6 relative z-[1]">
     <div class="font-mono text-xs uppercase tracking-[2px] text-cyan mb-4 reveal">// what's new</div>
     <h2 class="font-mono text-[clamp(28px,3.5vw,40px)] font-bold leading-tight tracking-tight mb-4 reveal">v{{ site.version }} Release</h2>
-    <p class="text-tsecondary text-base max-w-[560px] mb-12 leading-relaxed reveal">A cleaner mobile chat UI and a seamless, edge-to-edge Android launch &mdash; v1.9.0 refines the mobile experience on top of the protocol v4 foundation.</p>
+    <p class="text-tsecondary text-base max-w-[560px] mb-12 leading-relaxed reveal">A reliability release &mdash; v1.9.1 fixes dropped and timed-out connections, Chinese/Japanese/Korean input, and crashes with model fallback configs.</p>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {% set newFeatures = [
-        { "icon": "menu", "title": "Overflow Menu", "desc": "On mobile, the chat header controls collapse into a single overflow (⋮) menu — more room for the conversation, less chrome." },
-        { "icon": "image", "title": "Inline Composer", "desc": "A new inline attach (+) button in the composer, the mic hidden on mobile, and a trimmed placeholder for a cleaner input bar." },
-        { "icon": "zap", "title": "No Launch Flash", "desc": "Dark splash and window background eliminate the white flash on Android launch — dark from the very first frame." },
-        { "icon": "smartphone", "title": "True Edge-to-Edge", "desc": "Removed the native action bar and the white frame behind the status bar, with corrected safe-area insets for a seamless Android UI." },
-        { "icon": "globe", "title": "Themed In-App Browser", "desc": "Links open in an in-app browser that matches your app theme instead of jarring default system chrome." },
-        { "icon": "key", "title": "Clearer Pairing", "desc": "Recognizes OpenClaw v4 connect-error codes to surface the pairing UI, so first-time connection is easier to get right." }
+        { "icon": "zap", "title": "Steadier Connections", "desc": "No more false disconnects on busy servers, proper reconnect backoff, and an automatic connection check when you reopen the app." },
+        { "icon": "globe", "title": "CJK Input", "desc": "Chinese, Japanese and Korean IMEs now work in the message box on desktop and mobile." },
+        { "icon": "shield", "title": "Model Fallbacks", "desc": "Servers using {primary, fallbacks} model configs no longer crash the dashboard." },
+        { "icon": "menu", "title": "Scrollable Agent Menu", "desc": "Long agent lists scroll, with Create New Agent pinned at the top." },
+        { "icon": "key", "title": "Safer Settings Saves", "desc": "Config validation no longer restarts older OpenClaw servers mid-chat." },
+        { "icon": "smartphone", "title": "Mobile Polish", "desc": "Builds on v1.9.0's overflow menu, inline composer and edge-to-edge Android UI." }
       ] %}
 
       {% for f in newFeatures %}
